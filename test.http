@@ -1,0 +1,30 @@
+POST http://localhost:8080/api/monetarylimit/
+Content-Type: application/json
+
+{
+  "consumerAcronym": "BPY",
+  "authorizationToken": "454ERFDDF",
+  "channel": {
+    "code": null
+  },
+  "identification": {
+    "type": "CC",
+    "number": "1315987562"
+  },
+  "delegate": {
+    "type": "CC",
+    "number": "1315987562"
+  },
+  "thirdPartyRelations": {
+    "businessPartner": "Monet"
+  },
+  "limits": [
+    {
+      "transactionCode": "1000",
+      "type": "valor_del_type",
+      "customAmount": 100.5,
+      "operationsNumber": "234"
+    }
+
+  ]
+}
