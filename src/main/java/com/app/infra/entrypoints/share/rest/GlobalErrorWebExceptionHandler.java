@@ -1,6 +1,8 @@
 package com.app.infra.entrypoints.share.rest;
 
+import com.app.domain.share.exception.BusinessException;
 import com.app.infra.entrypoints.share.ecs.Ecs;
+import com.app.infra.entrypoints.share.rest.domain.RestResponse;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler;
 import org.springframework.boot.web.reactive.error.ErrorAttributes;
@@ -32,16 +34,25 @@ public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHan
 
           return accessError(serverRequest)
                   .flatMap(Mono::error)
-                  .onErrorResume(throwable -> Mono.just(Ecs.build(throwable)))
+      //            .onErrorResume(Ecs::build)
+                  .onErrorResume(BusinessException.class, this::businessError  )
                   .onErrorResume(this::unknownError)
                   .cast(ServerResponse.class);
+    }
+
+    public Mono<ServerResponse> businessError(BusinessException exception) {
+
+        return  ServerResponse
+                .status(HttpStatus.CONFLICT)
+                .body(Mono.just(RestResponse.error(exception)),
+                        RestResponse.class);
     }
 
     public Mono<ServerResponse> unknownError(Throwable exception) {
 
         return  ServerResponse
                         .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                        .body(Mono.just(exception.getMessage()), String.class);
+                        .body(Mono.just(exception.getCause()), String.class);
     }
 
     private Mono<Throwable> accessError(ServerRequest request) {

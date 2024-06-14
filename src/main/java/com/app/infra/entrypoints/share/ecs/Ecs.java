@@ -2,6 +2,7 @@ package com.app.infra.entrypoints.share.ecs;
 
 
 import com.app.infra.entrypoints.share.ecs.model.MiddlewareEcsLog;
+import reactor.core.publisher.Mono;
 
 public final class Ecs {
 
@@ -15,9 +16,9 @@ public final class Ecs {
 
     }
 
-    public static Throwable build(Throwable throwable) {
+    public static Mono<Throwable> build(Throwable throwable) {
         build().handler(throwable);
-        return throwable;
+        return Mono.just(throwable);
     }
 
 
