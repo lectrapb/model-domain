@@ -69,7 +69,10 @@ public class CustomLimitsSearchService {
                         clientResponse -> Mono.empty())
                 .bodyToMono(responseType)
                 .onErrorResume(Throwable.class,e ->
-                        Mono.error(new BusinessException(ConstantBusinessException.TIMEOUT_EXCEPTION, e.getMessage())));
+                {
+                    System.out.println(e.getMessage());
+                    return  Mono.error(new BusinessException(ConstantBusinessException.TIMEOUT_EXCEPTION, getBodyStr(e.getMessage())));
+                });
 
     }
 
