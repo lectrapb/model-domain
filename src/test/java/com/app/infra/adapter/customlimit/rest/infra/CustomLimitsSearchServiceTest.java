@@ -28,7 +28,7 @@ class CustomLimitsSearchServiceTest {
         Map<String, String> meta = new HashMap<>();
         meta.put(ConstantHeader.HEADER_CONSUMER_ACRONYM , "testChannel");
         meta.put(ConstantHeader.HEADER_MESSAGE_ID_SUID, "testUid");
-        var url = "https://41173142-7d45-46ce-99f0-c725b5a8cec5.mock.pstmn.io/list&data=3";
+        var url = "https://41173142-7d45-46ce-99f0-c725b5a8cec5.mock.pstmn.io/list&data=2";
         //var url = "https://af96e035-9a03-4ef7-91b1-4a0461eb238d.mock.pstmn.io/list&data=0";
         //When
         service.findCustomLimits(meta, url)
