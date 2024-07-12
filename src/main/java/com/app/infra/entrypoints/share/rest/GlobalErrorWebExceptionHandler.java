@@ -30,14 +30,16 @@ public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHan
         return RouterFunctions.route(RequestPredicates.all(), this::renderException);
     }
 
+
     private Mono<ServerResponse> renderException(ServerRequest serverRequest) {
 
-          return accessError(serverRequest)
-                  .flatMap(Mono::error)
-      //            .onErrorResume(Ecs::build)
-                  .onErrorResume(BusinessException.class, this::businessError  )
-                  .onErrorResume(this::unknownError)
-                  .cast(ServerResponse.class);
+        return accessError(serverRequest)
+                .flatMap(throwable -> Ecs.build(throwable,"ms_payment_service"))
+                .flatMap(Mono::error)
+                .onErrorResume(BusinessException.class, this::businessError  )
+                .onErrorResume(this::unknownError)
+                .cast(ServerResponse.class);
+
     }
 
     public Mono<ServerResponse> businessError(BusinessException exception) {

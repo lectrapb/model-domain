@@ -10,21 +10,27 @@ public class MiddlewareEcsTrow extends MiddlewareEcsLog {
 
     private MiddlewareEcsLog next;
     @Override
-    public void handler(Throwable request) {
+    public void handler(Throwable request,
+                        String service) {
          if(request != null){
 
-             var errorLog = new LogException.ErrorLog(
-                     request.getClass().getName(),
-                     request.getMessage(),
-                     Mapper.getStackTraceAsString(request));
+//             var errorLog = new LogException.ErrorLog(
+//                     request.getClass().getName(),
+//                     request.getMessage(),
+//                     Mapper.getStackTraceAsString(request));
+             var errorLog = LogException.ErrorLog.builder()
+                     .type( request.getClass().getName())
+                     .description(  request.getMessage())
+                     .message(request.getMessage())
+                     .build();
              var logExp = LogException.builder()
-                     .service("")
+                     .service(service)
                      .error(errorLog)
                      .level(LogException.Level.FATAL)
                      .build();
              LoggerEcs.print(logExp);
          }else if(next != null){
-             next.handler(request);
+             next.handler(request, service);
          }
     }
 

@@ -10,13 +10,19 @@ public class MiddlewareEcsExcp extends MiddlewareEcsLog {
 
     private MiddlewareEcsLog next;
     @Override
-    public void handler(Throwable request) {
+    public void handler(Throwable request,
+                        String service) {
          if(request  instanceof Exception exp){
 
-             var errorLog = new LogException.ErrorLog(
-                     exp.getClass().getName(),
-                     exp.getMessage(),
-                     Mapper.getStackTraceAsString(exp));
+//             var errorLog = new LogException.ErrorLog(
+//                     exp.getClass().getName(),
+//                     exp.getMessage(),
+//                     Mapper.getStackTraceAsString(exp));
+             var errorLog = LogException.ErrorLog.builder()
+                     .type(exp.getClass().getName())
+                     .description( exp.getMessage())
+                     .message(exp.getMessage())
+                     .build();
              var logExp = LogException.builder()
                      .service("")
                      .error(errorLog)
@@ -24,7 +30,7 @@ public class MiddlewareEcsExcp extends MiddlewareEcsLog {
                      .build();
              LoggerEcs.print(logExp);
          }else if(next != null){
-             next.handler(request);
+             next.handler(request, service);
          }
     }
 

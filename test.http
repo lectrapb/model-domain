@@ -1,5 +1,6 @@
 POST http://localhost:8080/api/monetarylimit/
 Content-Type: application/json
+message-id: 123e4567-e89b-12d3-a456-426614174000
 
 {
   "consumerAcronym": "BPY",
@@ -25,6 +26,5 @@ Content-Type: application/json
       "customAmount": 100.5,
       "operationsNumber": "234"
     }
-
   ]
 }

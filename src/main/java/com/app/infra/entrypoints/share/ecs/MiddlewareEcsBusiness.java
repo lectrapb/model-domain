@@ -14,19 +14,20 @@ public class MiddlewareEcsBusiness extends MiddlewareEcsLog {
 
     private MiddlewareEcsLog next;
     @Override
-    public void handler(Throwable request) {
+    public void handler(Throwable request,
+                        String service) {
          if(request instanceof BusinessException exp){
 
              System.out.println(" is an object of BusinessException Exception: "
                      + exp.getMessage());
 
-             var errorLog =new LogException.ErrorLog(
-                     exp.getConstantBusinessException().getInternalMessage(),
-                     exp.getConstantBusinessException().getInternalMessage(),
-                     exp.getConstantBusinessException().getInternalMessage());
+             var errorLog = LogException.ErrorLog.builder()
+                     .type(exp.getConstantBusinessException().getLogCode())
+                     .description(exp.getConstantBusinessException().getMessage())
+                     .message(exp.getConstantBusinessException().getInternalMessage())
+                     .build();
              //Load if it arrives
              var messageId = UUID.randomUUID().toString();
-             var service = "api-auth";
              var logExp = LogException.builder()
                      .messageId(messageId)
                      .service(service)
@@ -37,7 +38,7 @@ public class MiddlewareEcsBusiness extends MiddlewareEcsLog {
              LoggerEcs.print(logExp);
 
          }else if(next != null){
-             next.handler(request);
+             next.handler(request, service);
          }
     }
 

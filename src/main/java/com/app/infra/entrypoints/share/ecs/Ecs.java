@@ -16,8 +16,10 @@ public final class Ecs {
 
     }
 
-    public static Mono<Throwable> build(Throwable throwable) {
-        build().handler(throwable);
+    public static Mono<Throwable> build(Throwable throwable,
+                                        String service) {
+        build().handler(throwable,
+                        service);
         return Mono.just(throwable);
     }
 

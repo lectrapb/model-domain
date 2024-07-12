@@ -49,10 +49,12 @@ public class LogException implements Serializable {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @Builder
     public static class ErrorLog implements Serializable{
         private String type;
         private String message;
         private String description;
+        private String optionalInfo;
     }
 
     public enum Level implements Serializable{

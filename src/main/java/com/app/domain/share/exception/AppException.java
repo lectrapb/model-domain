@@ -6,11 +6,13 @@ import lombok.Getter;
 public class AppException extends RuntimeException {
 
     private final String code;
-    private final String detail;
+    private final String optionalInfo;
 
-    public AppException(String message, String code, String detail) {
+    public AppException(String message,
+                        String code,
+                        String optionalInfo) {
         super(message);
         this.code = code;
-        this.detail = detail;
+        this.optionalInfo = optionalInfo;
     }
 }

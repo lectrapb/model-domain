@@ -10,22 +10,24 @@ public class MiddlewareEcsApp extends MiddlewareEcsLog {
 
     private MiddlewareEcsLog next;
     @Override
-    public void handler(Throwable request) {
+    public void handler(Throwable request, String service) {
          if( request instanceof AppException exp){
              System.out.println(" is an object of App Exception: "
                      + exp.getCode());
-             var errorLog = new LogException.ErrorLog(
-                     exp.getCode(),
-                     exp.getMessage(),
-                     exp.getDetail());
+
+             var errorLog = LogException.ErrorLog.builder()
+                     .type(exp.getCode())
+                     .description( exp.getMessage())
+                     .message(exp.getMessage())
+                     .build();
              var logExp = LogException.builder()
-                     .service("")
+                     .service(service)
                      .error(errorLog)
                      .level(LogException.Level.ERROR)
                      .build();
              LoggerEcs.print(logExp);
          }else if(next != null){
-             next.handler(request);
+             next.handler(request, service);
          }
 
     }

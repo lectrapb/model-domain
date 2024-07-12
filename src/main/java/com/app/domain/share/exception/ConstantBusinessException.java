@@ -1,16 +1,26 @@
 package com.app.domain.share.exception;
 
-import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static java.net.HttpURLConnection.*;
 
 public enum ConstantBusinessException implements ErrorManagement{
 
     MISSING_PARAMETER_REQUEST_EXCEPTION(HTTP_BAD_REQUEST, CodeMjs.MISSING_PARAMETER_BODY,
-                                       BusinessCode.BER404_01, "Error en uno de los parametros del body",
+                                       BusinessCode.BER404_01,  LogMessages.MJS_01,
                                        LogCode.LOG404_01),
 
     BAD_DOMAIN_CHANNEL_PARAMETER_REQUEST_EXCEPTION(HTTP_BAD_REQUEST, CodeMjs.MISSING_PARAMETER_BODY,
             BusinessCode.BER404_01, "Error en el formato de tipo de canal por que llego nulo",
             LogCode.LOG404_03),
+
+    WRONG_ANSWER__REQUEST_EXCEPTION(HTTP_BAD_REQUEST, CodeMjs.MISSING_PARAMETER_BODY,
+            BusinessCode.BER404_01, "Error en el formato de tipo de canal por que llego nulo",
+            LogCode.LOG404_03),
+
+    TIMEOUT_EXCEPTION(HTTP_GATEWAY_TIMEOUT, CodeMjs.TIME_OUT_MESSAGE,
+            BusinessCode.BER404_01, "El llamado a un servicio externo fallo por timeout",
+            LogCode.LOG404_04 ),
+
+
 
     BAD_DOMAIN_PARAMETER_REQUEST_EXCEPTION(HTTP_BAD_REQUEST, CodeMjs.MISSING_PARAMETER_BODY,
             BusinessCode.BER404_01, "Error en el formato de tipo de documento",
@@ -42,16 +52,23 @@ public enum ConstantBusinessException implements ErrorManagement{
 
     }
 
+    private static class LogMessages {
+
+        public static final String MJS_01 = "Error en uno de los parametros del body";
+    }
+
     private static class LogCode {
-        public static final String LOG404_01 = "LOG404-01";
-        public static final String LOG404_02 = "LOG404-02";
-        public static final String LOG404_03 = "LOG404-03";
-        public static final String LOG404_04 = "LOG404-04";
+        public static final String LOG404_01 = "LOG404-001";
+        public static final String LOG404_02 = "LOG404-002";
+        public static final String LOG404_03 = "LOG404-003";
+        public static final String LOG404_04 = "LOG404-004";
 
     }
 
     private static class CodeMjs {
         public static final String MISSING_PARAMETER_BODY= "Faltan parametros obligatorios";
+        public static final String WRONG_ANSWER_EXTERNAL_SERVICE = "Error llamando a un servicio externo";
+        public static final String TIME_OUT_MESSAGE= "Retardo en la conexion a servicio externo";
 
 
     }

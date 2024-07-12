@@ -17,6 +17,7 @@ public class ThirdPartyLimit {
     private StatusMonetaryLimit status;
 
     public ThirdPartyLimit(Customer customer, StatusMonetaryLimit status, Channel channel) {
+
         this.id = new UUID();
         this.customer = customer;
         this.status = status;
