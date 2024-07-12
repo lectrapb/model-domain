@@ -68,14 +68,8 @@ public class CustomLimitsSearchService {
                         status -> status.value() == 204,
                         clientResponse -> Mono.empty())
                 .bodyToMono(responseType)
-                .onErrorResume(ReadTimeoutException.class, e -> {
-                    log.error("Error call SUID Identity 5XX Timeout error: {}", e.getMessage());
-                    return Mono.error(new BusinessException(ConstantBusinessException.TIMEOUT_EXCEPTION, e.getMessage()));
-                })
-                .onErrorResume(Throwable.class,e -> {
-                    log.error("Error call SUID Identity 5XX Timeout error: {}", e.getMessage());
-                    return Mono.error(new BusinessException(ConstantBusinessException.TIMEOUT_EXCEPTION, e.getMessage()));
-                });
+                .onErrorResume(Throwable.class,e ->
+                        Mono.error(new BusinessException(ConstantBusinessException.TIMEOUT_EXCEPTION, e.getMessage())));
 
     }
 
@@ -97,25 +91,6 @@ public class CustomLimitsSearchService {
                 });
     }
 
-    private  Mono<BusinessException> makeHttpRequest(TimeoutException timeoutException, String format){
-        log.error(format,timeoutException.getCause());
-        return Mono.error(new BusinessException(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION,
-                getBodyStr(timeoutException.getCause().getMessage())));
-    }
-
-    private <T> Mono<T> makeHttpRequest2(ClientResponse clientResponse,
-                                        Class<T> responseType) {
-        return clientResponse.bodyToMono(String.class)
-                .flatMap(body -> {
-                    try {
-                        T response = new ObjectMapper().readValue(body, responseType);
-                        return Mono.just(response);
-                    } catch (Exception e) {
-                        return Mono.error(new BusinessException(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION,
-                                body));
-                    }
-                });
-    }
 
     private String getBodyStr(String body){
         var objectMapper = new ObjectMapper();
