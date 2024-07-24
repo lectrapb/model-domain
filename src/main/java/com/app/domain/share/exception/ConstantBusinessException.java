@@ -18,7 +18,7 @@ public enum ConstantBusinessException implements ErrorManagement{
             LogCode.LOG404_03),
 
     WRONG_ANSWER__REQUEST_EXCEPTION_SUID(HTTP_UNAVAILABLE, CodeMjs.WRONG_ANSWER_EXTERNAL_SERVICE,
-            AppCode.APER500_00 , "Error en llamando a SUID",
+            AppCode.APER500_00 , "Error en llamando a SUID getIdentity",
             LogCode.LOG404_03),
 
     UNKNOWN_EXCEPTION(HTTP_GATEWAY_TIMEOUT, CodeMjs.TIME_OUT_MESSAGE,

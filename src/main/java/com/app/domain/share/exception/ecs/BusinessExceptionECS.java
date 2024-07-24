@@ -1,5 +1,6 @@
 package com.app.domain.share.exception.ecs;
 
+import com.app.domain.share.exception.BusinessException;
 import com.app.domain.share.exception.ConstantBusinessException;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -11,10 +12,15 @@ import java.util.Map;
 @Log4j2
 public class BusinessExceptionECS extends RuntimeException {
 
-    private final Map<String, String> optionalInfo;
-    private final ConstantBusinessException constantBusinessException;
+    private  Map<String, String> optionalInfo = new HashMap<>();
+    private  ConstantBusinessException constantBusinessException = ConstantBusinessException.DEFAULT_EXCEPTION;
     private static final String EMPTY = "";
     private static final String OPTIONAL = "OPTIONAL";
+
+
+    public BusinessExceptionECS(String message){
+        super(message);
+    }
 
     public BusinessExceptionECS(ConstantBusinessException message) {
         this(message, EMPTY);

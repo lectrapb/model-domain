@@ -74,7 +74,7 @@ public class CustomLimitsSearchService {
                             Map.of(CAUSE, e.getCause().toString(), SERVICE_KEY,SERVICE_NAME))  ));
     }
 
-    private Mono<BusinessExceptionECS> makeHttpRequest(ClientResponse clientResponse, String format) {
+    private Mono<BusinessException> makeHttpRequest(ClientResponse clientResponse, String format) {
         return clientResponse.bodyToMono(String.class)
                 .flatMap(body -> {
                     try {
@@ -85,6 +85,7 @@ public class CustomLimitsSearchService {
                     } catch (Exception e) {
                         return Mono.error(BusinessException.loggingStringOf(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
                                 body, format));
+
                     }
                 });
     }

@@ -1,9 +1,10 @@
 package com.app.domain.share.exception;
 
+import com.app.domain.share.exception.ecs.BusinessExceptionECS;
 import lombok.Getter;
 
 @Getter
-public class AppException extends RuntimeException {
+public class AppException extends BusinessExceptionECS {
 
     private final String code;
     private final String optionalInfo;

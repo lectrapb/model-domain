@@ -8,8 +8,13 @@ import lombok.extern.log4j.Log4j2;
 import java.util.Map;
 
 @Log4j2
-public class BusinessException extends BusinessExceptionECS {
+public class BusinessException extends BusinessExceptionECS{
 
+
+
+    public BusinessException(String message){
+        super(message);
+    }
 
 
     public BusinessException(ConstantBusinessException message) {
