@@ -3,7 +3,6 @@ package com.app.infra.entrypoints.share.ecs;
 
 import com.app.infra.entrypoints.share.ecs.model.LogException;
 import com.app.infra.entrypoints.share.ecs.model.LoggerEcs;
-import com.app.infra.entrypoints.share.ecs.model.Mapper;
 import com.app.infra.entrypoints.share.ecs.model.MiddlewareEcsLog;
 
 public class MiddlewareEcsTrow extends MiddlewareEcsLog {
@@ -14,10 +13,6 @@ public class MiddlewareEcsTrow extends MiddlewareEcsLog {
                         String service) {
          if(request != null){
 
-//             var errorLog = new LogException.ErrorLog(
-//                     request.getClass().getName(),
-//                     request.getMessage(),
-//                     Mapper.getStackTraceAsString(request));
              var errorLog = LogException.ErrorLog.builder()
                      .type( request.getClass().getName())
                      .description(  request.getMessage())

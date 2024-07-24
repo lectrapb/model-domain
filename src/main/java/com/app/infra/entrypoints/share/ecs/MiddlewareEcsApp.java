@@ -17,7 +17,7 @@ public class MiddlewareEcsApp extends MiddlewareEcsLog {
 
              var errorLog = LogException.ErrorLog.builder()
                      .type(exp.getCode())
-                     .description( exp.getMessage())
+                     .description(exp.getMessage())
                      .message(exp.getMessage())
                      .build();
              var logExp = LogException.builder()

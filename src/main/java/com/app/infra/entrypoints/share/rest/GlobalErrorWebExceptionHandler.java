@@ -1,6 +1,6 @@
 package com.app.infra.entrypoints.share.rest;
 
-import com.app.domain.share.exception.BusinessException;
+import com.app.domain.share.exception.ecs.BusinessExceptionECS;
 import com.app.infra.entrypoints.share.ecs.Ecs;
 import com.app.infra.entrypoints.share.rest.domain.RestResponse;
 import org.springframework.boot.autoconfigure.web.WebProperties;
@@ -36,13 +36,13 @@ public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHan
         return accessError(serverRequest)
                 .flatMap(throwable -> Ecs.build(throwable,"ms_payment_service"))
                 .flatMap(Mono::error)
-                .onErrorResume(BusinessException.class, this::businessError  )
+                .onErrorResume(BusinessExceptionECS.class, this::businessError  )
                 .onErrorResume(this::unknownError)
                 .cast(ServerResponse.class);
 
     }
 
-    public Mono<ServerResponse> businessError(BusinessException exception) {
+    public Mono<ServerResponse> businessError(BusinessExceptionECS exception) {
 
         return  ServerResponse
                 .status(HttpStatus.CONFLICT)

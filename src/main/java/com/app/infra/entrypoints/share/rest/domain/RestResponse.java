@@ -1,6 +1,6 @@
 package com.app.infra.entrypoints.share.rest.domain;
 
-import com.app.domain.share.exception.BusinessException;
+import com.app.domain.share.exception.ecs.BusinessExceptionECS;
 import lombok.*;
 
 import java.time.Instant;
@@ -34,7 +34,7 @@ public class RestResponse {
 
 
     @SneakyThrows
-    public static RestResponse error(BusinessException exception)  {
+    public static RestResponse error(BusinessExceptionECS exception)  {
 
         var meta = setMeta();
         var error = new ErrorApi();

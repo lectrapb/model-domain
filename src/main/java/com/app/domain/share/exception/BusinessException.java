@@ -1,33 +1,46 @@
 package com.app.domain.share.exception;
 
-public class BusinessException  extends RuntimeException{
+import com.app.domain.share.exception.ecs.BusinessExceptionECS;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.log4j.Log4j2;
 
-    private String customLogMjs;
-    private final ConstantBusinessException constantBusinessException;
+import java.util.Map;
+
+@Log4j2
+public class BusinessException extends BusinessExceptionECS {
+
+
 
     public BusinessException(ConstantBusinessException message) {
+        super(message);
+    }
 
-        super(message.getLogCode());
-        this.constantBusinessException = message;
+    public BusinessException(ConstantBusinessException message, String optionalInfo) {
+        super(message, optionalInfo);
+    }
+
+    public BusinessException(ConstantBusinessException message, Map<String, String> optionalInfoJson) {
+        super(message, optionalInfoJson);
+    }
+
+    public static BusinessException loggingJsonOf(ConstantBusinessException constantBusinessException,
+                              Map map, String format) throws JsonProcessingException {
+        String ERROR_KEY = "output-request";
+        var objectMapper = new ObjectMapper();
+        var bodyStrLog = objectMapper.writeValueAsString(map);
+        var bodyStr = bodyStrLog.replace("\"", "'");
+        var errorMap = Map.of(ERROR_KEY,bodyStr);
+        log.error(format, bodyStrLog);
+        return new BusinessException(constantBusinessException,errorMap);
 
     }
 
-    public BusinessException(ConstantBusinessException message, String customLogMjs) {
-        super(message.getErrorCode());
-        this.customLogMjs = customLogMjs;
-        this.constantBusinessException = message;
-    }
-
-    public String getCustomLogMjs() {
-        return customLogMjs;
-    }
-
-    public ConstantBusinessException getConstantBusinessException() {
-        return constantBusinessException;
-    }
-
-
-    public boolean isPresentBusinessException(){
-        return constantBusinessException != null;
+    public static BusinessException loggingStringOf (ConstantBusinessException message, String bodyStrLog,
+                                                     String format ) {
+        String ERROR_KEY = "output-request";
+        var errorMap =  Map.of(ERROR_KEY,bodyStrLog);
+        log.error(format, bodyStrLog);
+        return new BusinessException(message, errorMap);
     }
 }

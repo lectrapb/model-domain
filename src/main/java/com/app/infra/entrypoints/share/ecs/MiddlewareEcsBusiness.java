@@ -1,9 +1,6 @@
 package com.app.infra.entrypoints.share.ecs;
 
-
-
-
-import com.app.domain.share.exception.BusinessException;
+import com.app.domain.share.exception.ecs.BusinessExceptionECS;
 import com.app.infra.entrypoints.share.ecs.model.LogException;
 import com.app.infra.entrypoints.share.ecs.model.LoggerEcs;
 import com.app.infra.entrypoints.share.ecs.model.MiddlewareEcsLog;
@@ -12,21 +9,21 @@ import java.util.UUID;
 
 public class MiddlewareEcsBusiness extends MiddlewareEcsLog {
 
+
     private MiddlewareEcsLog next;
+
     @Override
     public void handler(Throwable request,
                         String service) {
-         if(request instanceof BusinessException exp){
-
-             System.out.println(" is an object of BusinessException Exception: "
-                     + exp.getMessage());
+         if(request instanceof BusinessExceptionECS exp){
 
              var errorLog = LogException.ErrorLog.builder()
                      .type(exp.getConstantBusinessException().getLogCode())
-                     .description(exp.getConstantBusinessException().getMessage())
-                     .message(exp.getConstantBusinessException().getInternalMessage())
+                     .description(exp.getConstantBusinessException().getInternalMessage())
+                     .message(exp.getConstantBusinessException().getMessage())
+                     .optionalInfo(exp.getOptionalInfo())
                      .build();
-             //Load if it arrives
+
              var messageId = UUID.randomUUID().toString();
              var logExp = LogException.builder()
                      .messageId(messageId)

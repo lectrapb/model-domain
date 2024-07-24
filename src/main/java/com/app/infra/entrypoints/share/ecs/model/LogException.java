@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -54,7 +55,7 @@ public class LogException implements Serializable {
         private String type;
         private String message;
         private String description;
-        private String optionalInfo;
+        private Map<String,String> optionalInfo;
     }
 
     public enum Level implements Serializable{
