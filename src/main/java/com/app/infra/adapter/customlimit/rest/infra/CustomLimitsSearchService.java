@@ -5,6 +5,7 @@ import com.app.domain.share.exception.ConstantBusinessException;
 import com.app.domain.share.exception.ecs.BusinessExceptionECS;
 import com.app.infra.adapter.customlimit.rest.domain.ConstantHeader;
 import com.app.infra.adapter.customlimit.rest.domain.SearchCustomLimit;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
@@ -60,11 +61,9 @@ public class CustomLimitsSearchService {
                 .headers(it -> it.addAll(dataHeader))
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError,
-                        clientResponse -> makeHttpRequest(clientResponse,
-                                "Error call SUID Identity 4XX content:{}"))
+                        clientResponse -> makeHttpRequest(clientResponse))
                 .onStatus(HttpStatusCode::is5xxServerError,
-                        clientResponse -> makeHttpRequest(clientResponse,
-                                "Error call SUID Identity 5XX content:{}"))
+                        clientResponse -> makeHttpRequest(clientResponse))
                 .onStatus(
                         status -> status.value() == 204,
                         clientResponse -> Mono.empty())
@@ -74,17 +73,32 @@ public class CustomLimitsSearchService {
                             Map.of(CAUSE, e.getCause().toString(), SERVICE_KEY,SERVICE_NAME))  ));
     }
 
-    private Mono<BusinessException> makeHttpRequest(ClientResponse clientResponse, String format) {
+    private Mono<BusinessException> makeHttpRequest(ClientResponse clientResponse) {
         return clientResponse.bodyToMono(String.class)
                 .flatMap(body -> {
                     try {
                         var objectMapper = new ObjectMapper();
-                        Map map = objectMapper.readValue(body, Map.class);
-                        return Mono.error(BusinessException.loggingJsonOf(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
-                                map, format));
+                        //Map map = objectMapper.readValue(body, Map.class);
+                        var bodyReplace =body.replace("\\n", "")
+                                .replace("\\r", "")
+                                .replace("\\t", "")
+                                .replaceAll("\\s+", "")
+                                .replace("\"\"", "\"");
+                        var map = objectMapper.readValue(bodyReplace, Map.class);
+
+
+                       // var map1 = objectMapper.readValue( mapReplace, new TypeReference<Map<String, Object>>() {} );
+
+
+//                        return Mono.error(BusinessException.loggingJsonOf(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
+//                                map, format));
+                        return Mono.error(new BusinessException(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
+                               map) );
                     } catch (Exception e) {
-                        return Mono.error(BusinessException.loggingStringOf(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
-                                body, format));
+//                        return Mono.error(BusinessException.loggingStringOf(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
+//                                body, format));
+                        return Mono.error(new BusinessException(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
+                                body));
 
                     }
                 });

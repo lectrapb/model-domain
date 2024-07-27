@@ -32,10 +32,10 @@ public enum ConstantBusinessException implements ErrorManagement{
 
 
     private final Integer status;
-    private final String message;
-    private final String errorCode;
-    private final String internalMessage;
-    private final String logCode;
+    private final String  message;
+    private final String  errorCode;
+    private final String  internalMessage;
+    private final String  logCode;
 
 
     ConstantBusinessException(Integer status, String message, String errorCode, String internalMessage, String logCode) {

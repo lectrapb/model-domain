@@ -4,7 +4,7 @@ import com.app.domain.share.exception.ecs.BusinessExceptionECS;
 import lombok.Getter;
 
 @Getter
-public class AppException extends BusinessExceptionECS {
+public class AppException extends RuntimeException  {
 
     private final String code;
     private final String optionalInfo;

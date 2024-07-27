@@ -41,6 +41,7 @@ public class LogException implements Serializable {
         ObjectMapper objectMapper = new ObjectMapper();
         try{
             return  objectMapper.writeValueAsString(this);
+
         }catch (JsonProcessingException ex){
             return "{\"error:\" \"json conversion fail\"}";
         }
@@ -55,7 +56,7 @@ public class LogException implements Serializable {
         private String type;
         private String message;
         private String description;
-        private Map<String,String> optionalInfo;
+        private Map optionalInfo;
     }
 
     public enum Level implements Serializable{
