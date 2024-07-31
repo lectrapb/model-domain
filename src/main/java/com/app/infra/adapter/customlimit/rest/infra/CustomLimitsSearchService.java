@@ -5,7 +5,6 @@ import com.app.domain.share.exception.ConstantBusinessException;
 import com.app.domain.share.exception.ecs.BusinessExceptionECS;
 import com.app.infra.adapter.customlimit.rest.domain.ConstantHeader;
 import com.app.infra.adapter.customlimit.rest.domain.SearchCustomLimit;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatusCode;
@@ -17,6 +16,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
+import java.util.UUID;
 
 
 @Service
@@ -78,25 +78,15 @@ public class CustomLimitsSearchService {
                 .flatMap(body -> {
                     try {
                         var objectMapper = new ObjectMapper();
-                        //Map map = objectMapper.readValue(body, Map.class);
                         var bodyReplace =body.replace("\\n", "")
                                 .replace("\\r", "")
                                 .replace("\\t", "")
                                 .replaceAll("\\s+", "")
                                 .replace("\"\"", "\"");
                         var map = objectMapper.readValue(bodyReplace, Map.class);
-
-
-                       // var map1 = objectMapper.readValue( mapReplace, new TypeReference<Map<String, Object>>() {} );
-
-
-//                        return Mono.error(BusinessException.loggingJsonOf(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
-//                                map, format));
                         return Mono.error(new BusinessException(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
-                               map) );
+                               map, Map.of(BusinessExceptionECS.MESSAGE_ID, UUID.randomUUID().toString())) );
                     } catch (Exception e) {
-//                        return Mono.error(BusinessException.loggingStringOf(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
-//                                body, format));
                         return Mono.error(new BusinessException(ConstantBusinessException.WRONG_ANSWER__REQUEST_EXCEPTION_SUID,
                                 body));
 

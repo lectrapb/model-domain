@@ -4,8 +4,6 @@ import com.app.domain.share.exception.ecs.BusinessExceptionECS;
 import com.app.infra.entrypoints.share.ecs.model.LogException;
 import com.app.infra.entrypoints.share.ecs.model.LoggerEcs;
 import com.app.infra.entrypoints.share.ecs.model.MiddlewareEcsLog;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
 
@@ -19,20 +17,6 @@ public class MiddlewareEcsBusiness extends MiddlewareEcsLog {
                         String service) {
          if(request instanceof BusinessExceptionECS exp){
 
-//             var isOptional = exp.getOptionalInfo().containsKey("OPTIONAL");
-//             var optionalStr = exp.getConstantBusinessException().getMessage();
-//
-//             if(isOptional){
-//                 var objectMapper = new ObjectMapper();
-//                 try {
-//                     optionalStr = objectMapper.writeValueAsString( exp.getOptionalInfo());
-//                     optionalStr.replace("\"", "'");
-//                 } catch (JsonProcessingException e) {
-//                     throw new RuntimeException(e);
-//                 }
-//             }
-
-
              var errorLog = LogException.ErrorLog.builder()
                      .type(exp.getConstantBusinessException().getLogCode())
                      .description(exp.getConstantBusinessException().getInternalMessage())
@@ -40,7 +24,9 @@ public class MiddlewareEcsBusiness extends MiddlewareEcsLog {
                      .optionalInfo(exp.getOptionalInfo())
                      .build();
 
-             var messageId = UUID.randomUUID().toString();
+             var messageId =  exp.getMetaInfo()
+                     .getOrDefault(BusinessExceptionECS.MESSAGE_ID,
+                     UUID.randomUUID().toString());
              var logExp = LogException.builder()
                      .messageId(messageId)
                      .service(service)

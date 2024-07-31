@@ -16,11 +16,9 @@ public class BusinessException extends BusinessExceptionECS{
         super(message);
     }
 
-
     public BusinessException(ConstantBusinessException message) {
         super(message);
     }
-
     public BusinessException(ConstantBusinessException message, String optionalInfo) {
         super(message, optionalInfo);
     }
@@ -29,8 +27,12 @@ public class BusinessException extends BusinessExceptionECS{
         super(message, optionalInfoJson);
     }
 
+    public BusinessException(ConstantBusinessException message, Map<String, String> optionalInfo, Map<String, String> metaInfo) {
+        super(message, optionalInfo, metaInfo);
+    }
+
     public static BusinessException loggingJsonOf(ConstantBusinessException constantBusinessException,
-                              Map map, String format) throws JsonProcessingException {
+                                                  Map map, String format) throws JsonProcessingException {
         String ERROR_KEY = "output-request";
         var objectMapper = new ObjectMapper();
         var bodyStrLog = objectMapper.writeValueAsString(map);
