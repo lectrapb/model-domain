@@ -12,8 +12,6 @@ public class MiddlewareEcsApp extends MiddlewareEcsLog {
     @Override
     public void handler(Throwable request, String service) {
          if( request instanceof AppException exp){
-             System.out.println(" is an object of App Exception: "
-                     + exp.getCode());
 
              var errorLog = LogException.ErrorLog.builder()
                      .type(exp.getCode())

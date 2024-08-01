@@ -5,10 +5,7 @@ import com.app.infra.entrypoints.share.ecs.model.LogException;
 import com.app.infra.entrypoints.share.ecs.model.LoggerEcs;
 import com.app.infra.entrypoints.share.ecs.model.MiddlewareEcsLog;
 
-import java.util.UUID;
-
 public class MiddlewareEcsBusiness extends MiddlewareEcsLog {
-
 
     private MiddlewareEcsLog next;
 
@@ -24,16 +21,12 @@ public class MiddlewareEcsBusiness extends MiddlewareEcsLog {
                      .optionalInfo(exp.getOptionalInfo())
                      .build();
 
-             var messageId =  exp.getMetaInfo()
-                     .getOrDefault(BusinessExceptionECS.MESSAGE_ID,
-                     UUID.randomUUID().toString());
              var logExp = LogException.builder()
-                     .messageId(messageId)
+                     .messageId(exp.getMetaInfo().getMessageId())
                      .service(service)
                      .error(errorLog)
                      .level(LogException.Level.ERROR)
                      .build();
-
 
              LoggerEcs.print(logExp);
 

@@ -4,4 +4,5 @@ public class ConstantHeader {
 
     public static final String HEADER_CONSUMER_ACRONYM = "x-consumer-acronym";
     public static final String HEADER_MESSAGE_ID_SUID  = "x-message-id-suid";
+    public static final String MESSAGE_ID = "message-id";
 }
