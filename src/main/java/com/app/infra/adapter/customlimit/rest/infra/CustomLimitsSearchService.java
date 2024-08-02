@@ -69,9 +69,13 @@ public class CustomLimitsSearchService {
                         status -> status.value() == 204,
                         clientResponse -> Mono.empty())
                 .bodyToMono(responseType)
-                .onErrorResume(Throwable.class, e -> (e instanceof BusinessException)?Mono.error(e)
-                        :Mono.error(new BusinessException(ConstantBusinessException.UNKNOWN_EXCEPTION,
-                            Map.of(CAUSE, e.getCause().toString(), SERVICE_KEY,SERVICE_NAME))  ));
+                .onErrorResume(Throwable.class, e -> {
+
+                    System.out.println("Hola");
+                     return (e instanceof BusinessException)?Mono.error(e)
+                            :Mono.error(new BusinessException(ConstantBusinessException.UNKNOWN_EXCEPTION,
+                            Map.of(CAUSE, e.getCause().toString(), SERVICE_KEY,SERVICE_NAME))  );
+                });
     }
 
     private Mono<BusinessException> makeHttpRequest(ClientResponse clientResponse, String messageId) {
