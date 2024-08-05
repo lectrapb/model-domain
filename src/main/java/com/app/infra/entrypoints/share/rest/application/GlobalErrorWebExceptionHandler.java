@@ -1,5 +1,6 @@
 package com.app.infra.entrypoints.share.rest.application;
 
+import com.app.domain.share.model.exception.BusinessException;
 import com.app.domain.share.model.exception.ecs.BusinessExceptionECS;
 import com.app.infra.entrypoints.share.helpers.ecs.Ecs;
 import com.app.infra.entrypoints.share.rest.domain.RestResponse;
@@ -34,15 +35,15 @@ public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHan
     private Mono<ServerResponse> renderException(ServerRequest serverRequest) {
 
         return accessError(serverRequest)
-                .flatMap(throwable -> Ecs.build(throwable,"ms_payment_service"))
+                .flatMap(throwable -> Ecs.build(throwable,"ms_payment_service")) //line to add Logs ECS
                 .flatMap(Mono::error)
-                .onErrorResume(BusinessExceptionECS.class, this::businessError  )
+                .onErrorResume(BusinessException.class, this::businessError  )
                 .onErrorResume(this::unknownError)
                 .cast(ServerResponse.class);
 
     }
 
-    public Mono<ServerResponse> businessError(BusinessExceptionECS exception) {
+    public Mono<ServerResponse> businessError(BusinessException exception) {
 
         return  ServerResponse
                 .status(HttpStatus.CONFLICT)
