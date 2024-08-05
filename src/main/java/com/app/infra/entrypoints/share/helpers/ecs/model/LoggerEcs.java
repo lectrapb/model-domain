@@ -1,4 +1,4 @@
-package com.app.infra.entrypoints.share.ecs.model;
+package com.app.infra.entrypoints.share.helpers.ecs.model;
 
 import lombok.extern.log4j.Log4j2;
 

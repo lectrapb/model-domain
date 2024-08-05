@@ -1,7 +1,7 @@
-package com.app.infra.entrypoints.share.ecs;
+package com.app.infra.entrypoints.share.helpers.ecs;
 
 
-import com.app.infra.entrypoints.share.ecs.model.MiddlewareEcsLog;
+import com.app.infra.entrypoints.share.helpers.ecs.model.MiddlewareEcsLog;
 import reactor.core.publisher.Mono;
 
 public final class Ecs {

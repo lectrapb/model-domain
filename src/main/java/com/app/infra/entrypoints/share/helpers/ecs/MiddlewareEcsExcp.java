@@ -1,9 +1,9 @@
-package com.app.infra.entrypoints.share.ecs;
+package com.app.infra.entrypoints.share.helpers.ecs;
 
 
-import com.app.infra.entrypoints.share.ecs.model.LogException;
-import com.app.infra.entrypoints.share.ecs.model.LoggerEcs;
-import com.app.infra.entrypoints.share.ecs.model.MiddlewareEcsLog;
+import com.app.infra.entrypoints.share.helpers.ecs.model.LogException;
+import com.app.infra.entrypoints.share.helpers.ecs.model.LoggerEcs;
+import com.app.infra.entrypoints.share.helpers.ecs.model.MiddlewareEcsLog;
 
 public class MiddlewareEcsExcp extends MiddlewareEcsLog {
 

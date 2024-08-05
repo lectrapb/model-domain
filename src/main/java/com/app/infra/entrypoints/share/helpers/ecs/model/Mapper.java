@@ -1,4 +1,4 @@
-package com.app.infra.entrypoints.share.ecs.model;
+package com.app.infra.entrypoints.share.helpers.ecs.model;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

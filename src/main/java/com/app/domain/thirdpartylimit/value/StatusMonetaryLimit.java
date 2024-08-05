@@ -1,7 +1,7 @@
 package com.app.domain.thirdpartylimit.value;
 
-import com.app.domain.share.exception.BusinessException;
-import com.app.domain.share.exception.ConstantBusinessException;
+import com.app.domain.share.model.exception.BusinessException;
+import com.app.domain.share.model.exception.ConstantBusinessException;
 import com.app.domain.share.value.StatusLimitAvailable;
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.app.infra.entrypoints.share.ecs.model;
+package com.app.infra.entrypoints.share.helpers.ecs.model;
 
 public abstract class MiddlewareEcsLog {
 

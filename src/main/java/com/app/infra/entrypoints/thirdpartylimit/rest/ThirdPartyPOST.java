@@ -2,7 +2,7 @@ package com.app.infra.entrypoints.thirdpartylimit.rest;
 
 
 import com.app.application.thirdpartylimit.MonetaryLimitsCreator;
-import com.app.domain.MonetaryLimitCreate;
+import com.app.domain.share.model.MonetaryLimitCreate;
 import com.app.infra.entrypoints.share.rest.domain.RestResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.app.domain.share.exception;
+package com.app.domain.share.model.exception;
 
 public interface ErrorManagement {
 

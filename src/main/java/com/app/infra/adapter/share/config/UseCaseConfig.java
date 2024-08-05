@@ -1,6 +1,6 @@
 package com.app.infra.adapter.share.config;
 
-import com.app.domain.share.labels.UseCase;
+import com.app.domain.share.gateway.labels.UseCase;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;

@@ -18,7 +18,7 @@ public class SearchCustomLimitAdapter implements SearchCustomLimitGateway {
     public Mono<Object> customLimit(Map<String, String> meta) {
         String URL_TEST = "URL-TEST";
         var url = meta.get(URL_TEST);
-        return searchService.makeHttpRequest(Object.class,
+        return searchService.buildException(Object.class,
                                              meta, Object.class,
                                              url);
     }

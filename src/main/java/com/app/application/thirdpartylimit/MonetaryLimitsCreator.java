@@ -1,7 +1,7 @@
 package com.app.application.thirdpartylimit;
 
-import com.app.domain.MonetaryLimitCreate;
-import com.app.domain.share.labels.UseCase;
+import com.app.domain.share.model.MonetaryLimitCreate;
+import com.app.domain.share.gateway.labels.UseCase;
 import com.app.domain.share.value.StatusLimitAvailable;
 import com.app.domain.thirdpartylimit.gateway.MonetaryLimitCreatorGateway;
 import com.app.domain.thirdpartylimit.model.Channel;

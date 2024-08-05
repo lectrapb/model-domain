@@ -1,7 +1,7 @@
 package com.app.application;
 
 import com.app.application.thirdpartylimit.MonetaryLimitsCreator;
-import com.app.domain.MonetaryLimitCreate;
+import com.app.domain.share.model.MonetaryLimitCreate;
 import com.app.domain.thirdpartylimit.gateway.MonetaryLimitCreatorGateway;
 import com.app.domain.share.value.TypeDocumentAvailable;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,7 +1,7 @@
 package com.app.application.customlimit;
 
 
-import com.app.domain.share.labels.UseCase;
+import com.app.domain.share.gateway.labels.UseCase;
 import lombok.AllArgsConstructor;
 import reactor.core.publisher.Mono;
 import  com.app.domain.customlimit.gateway.SearchCustomLimitGateway;

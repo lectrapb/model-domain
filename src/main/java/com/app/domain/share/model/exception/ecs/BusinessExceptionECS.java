@@ -1,6 +1,6 @@
-package com.app.domain.share.exception.ecs;
+package com.app.domain.share.model.exception.ecs;
 
-import com.app.domain.share.exception.ConstantBusinessException;
+import com.app.domain.share.model.exception.ConstantBusinessException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -26,6 +26,13 @@ public class BusinessExceptionECS extends RuntimeException {
 
     public BusinessExceptionECS(ConstantBusinessException message) {
         this(message, EMPTY);
+        this.metaInfo = MetaInfo.builder().build();
+    }
+
+    public BusinessExceptionECS(ConstantBusinessException message,  MetaInfo metaInfo) {
+        super(validateMessage(message).getLogCode());
+        this.constantBusinessException = validateMessage(message);
+        this.optionalInfo.put (OPTIONAL,  EMPTY);
         this.metaInfo = MetaInfo.builder().build();
     }
 

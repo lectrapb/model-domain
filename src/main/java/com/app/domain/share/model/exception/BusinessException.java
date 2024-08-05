@@ -1,12 +1,12 @@
-package com.app.domain.share.exception;
+package com.app.domain.share.model.exception;
 
-import com.app.domain.share.exception.ecs.BusinessExceptionECS;
+import com.app.domain.share.model.exception.ecs.BusinessExceptionECS;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.Map;
 
 @Log4j2
-public class BusinessException extends BusinessExceptionECS{
+public class BusinessException extends BusinessExceptionECS {
 
 
     public BusinessException(String message) {
@@ -21,6 +21,9 @@ public class BusinessException extends BusinessExceptionECS{
         super(message, optionalInfo);
     }
 
+    public BusinessException(ConstantBusinessException message,  MetaInfo metaInfo) {
+        super(message,metaInfo);
+    }
 
     public BusinessException(ConstantBusinessException message, String optionalInfo, String messageId) {
         super(message, optionalInfo, BusinessExceptionECS.MetaInfo.builder().messageId(messageId).build());

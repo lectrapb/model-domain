@@ -1,6 +1,5 @@
-package com.app.domain.share.exception;
+package com.app.domain.share.model.exception;
 
-import com.app.domain.share.exception.ecs.BusinessExceptionECS;
 import lombok.Getter;
 
 @Getter
