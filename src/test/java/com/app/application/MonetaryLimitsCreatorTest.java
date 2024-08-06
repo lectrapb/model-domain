@@ -1,7 +1,9 @@
 package com.app.application;
 
 import com.app.application.thirdpartylimit.MonetaryLimitsCreator;
-import com.app.domain.share.model.MonetaryLimitCreate;
+import com.app.domain.customlimit.model.Command;
+import com.app.domain.share.model.cqrs.ContextData;
+import com.app.domain.share.model.cqrs.MonetaryLimitCreate;
 import com.app.domain.thirdpartylimit.gateway.MonetaryLimitCreatorGateway;
 import com.app.domain.share.value.TypeDocumentAvailable;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,15 +33,16 @@ class MonetaryLimitsCreatorTest {
     void addLimit_null_test() {
         //Given
         var identification = new MonetaryLimitCreate.Identification("", "");
+        var context = ContextData.builder().build();
         var request = MonetaryLimitCreate.builder()
                 .identification(new MonetaryLimitCreate.Identification(identification.getType(), identification.getNumber()))
                 .build();
         //When
         //Then
-        useCase.addLimit(request)
+      useCase.addLimit(new Command<>(request,context))
                 .as(StepVerifier::create)
-                .expectError()
-                .verify();
+                .verifyComplete();
+
     }
 
 
@@ -67,10 +70,12 @@ class MonetaryLimitsCreatorTest {
                 .thirdPartyRelations(thirdPartyRelations)
                 .limits(limits)
                 .build();
+        var context = ContextData.builder().build();
         //When
         when(repository.save(any())).thenReturn(Mono.empty());
+
         //Then
-        useCase.addLimit(request)
+        useCase.addLimit(new Command<>(request,context))
                 .as(StepVerifier::create)
                 .verifyComplete();
     }

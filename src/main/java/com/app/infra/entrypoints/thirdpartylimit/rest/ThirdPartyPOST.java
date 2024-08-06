@@ -2,7 +2,10 @@ package com.app.infra.entrypoints.thirdpartylimit.rest;
 
 
 import com.app.application.thirdpartylimit.MonetaryLimitsCreator;
-import com.app.domain.share.model.MonetaryLimitCreate;
+import com.app.domain.customlimit.model.Command;
+import com.app.domain.share.model.cqrs.ContextData;
+import com.app.domain.share.model.cqrs.MonetaryLimitCreate;
+import com.app.infra.adapter.customlimit.rest.domain.ConstantHeader;
 import com.app.infra.entrypoints.share.rest.domain.RestResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,8 +27,10 @@ public class ThirdPartyPOST {
 
     public Mono<ServerResponse> create(ServerRequest request){
 
+        var messageId = request.headers().asHttpHeaders().getFirst(ConstantHeader.MESSAGE_ID);
         return request.bodyToMono(MonetaryLimitCreate.class)
-                .flatMap(limitCreate::addLimit)
+                .flatMap(monetaryLimitCreate -> limitCreate.addLimit(new Command<>(monetaryLimitCreate,
+                        ContextData.builder().messageId(messageId).build())))
                 .map(Optional::of)
                 .defaultIfEmpty(Optional.empty())
                 .flatMap(opt -> ServerResponse.status(HttpStatus.CREATED)

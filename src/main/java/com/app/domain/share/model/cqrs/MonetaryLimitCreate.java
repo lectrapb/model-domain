@@ -1,4 +1,4 @@
-package com.app.domain.share.model;
+package com.app.domain.share.model.cqrs;
 
 import lombok.*;
 

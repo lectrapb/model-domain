@@ -1,6 +1,9 @@
 package com.app.application.thirdpartylimit;
 
-import com.app.domain.share.model.MonetaryLimitCreate;
+import com.app.domain.share.model.cqrs.ContextData;
+import com.app.domain.customlimit.model.Command;
+import com.app.domain.customlimit.model.Query;
+import com.app.domain.share.model.cqrs.MonetaryLimitCreate;
 import com.app.domain.share.gateway.labels.UseCase;
 import com.app.domain.share.value.StatusLimitAvailable;
 import com.app.domain.thirdpartylimit.gateway.MonetaryLimitCreatorGateway;
@@ -17,7 +20,7 @@ import reactor.core.publisher.Mono;
 public class MonetaryLimitsCreator {
 
     private final MonetaryLimitCreatorGateway repository;
-
+/*
     public Mono<Void> addLimit(MonetaryLimitCreate limitCreate){
 
 
@@ -29,5 +32,24 @@ public class MonetaryLimitsCreator {
                 )
 
                 .flatMap(repository::save);
+    }
+*/
+    public Mono<Void> addLimit(Command<MonetaryLimitCreate, ContextData> command){
+
+                var thirdParty = new ThirdPartyLimit(
+                        Customer.of(command.payload().getIdentification().getType(),
+                                command.payload().getIdentification().getNumber()),
+                        new StatusMonetaryLimit(StatusLimitAvailable.ENABLE.name()),
+                        new Channel( command.payload().getChannel().getCode()));
+
+                return Mono.fromCallable(() ->
+                                new Command<>(thirdParty, command.context()))
+                       .flatMap(repository::save);
+
+    }
+
+    public Mono<Query<MonetaryLimitCreate, ContextData>> addLimit(Query<MonetaryLimitCreate, ContextData> query){
+
+        return null;
     }
 }
