@@ -14,6 +14,8 @@ import com.app.domain.thirdpartylimit.value.StatusMonetaryLimit;
 import lombok.AllArgsConstructor;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 
 @UseCase
 @AllArgsConstructor
@@ -42,6 +44,13 @@ public class MonetaryLimitsCreator {
                         new StatusMonetaryLimit(StatusLimitAvailable.ENABLE.name()),
                         new Channel( command.payload().getChannel().getCode()));
 
+                var thirpartyLimit = Map.of("result", 1,
+                        "id", 100);
+                var querySuid = new Query<>(thirpartyLimit, command.context());
+                var result = repository.searchSuid(querySuid);
+
+                //----
+                // put, create and Update son commandos
                 return Mono.fromCallable(() ->
                                 new Command<>(thirdParty, command.context()))
                        .flatMap(repository::save);

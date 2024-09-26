@@ -9,4 +9,6 @@ import lombok.*;
 public class ContextData {
 
     private String messageId;
+    private String channel;
+
 }

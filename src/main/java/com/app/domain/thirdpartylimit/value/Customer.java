@@ -1,6 +1,8 @@
 package com.app.domain.thirdpartylimit.value;
 
 
+import com.app.domain.share.model.exception.ConstantBusinessException;
+
 public record Customer(TypeDocument type, String number) {
 
 

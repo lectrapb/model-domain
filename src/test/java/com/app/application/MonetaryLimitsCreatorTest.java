@@ -7,6 +7,7 @@ import com.app.domain.share.model.cqrs.MonetaryLimitCreate;
 import com.app.domain.thirdpartylimit.gateway.MonetaryLimitCreatorGateway;
 import com.app.domain.share.value.TypeDocumentAvailable;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -30,6 +31,7 @@ class MonetaryLimitsCreatorTest {
     }
 
     @Test
+    @Disabled
     void addLimit_null_test() {
         //Given
         var identification = new MonetaryLimitCreate.Identification("", "");

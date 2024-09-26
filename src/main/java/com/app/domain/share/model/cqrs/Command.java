@@ -3,7 +3,7 @@ package com.app.domain.customlimit.model;
 public class Command <T,C>{
 
     private T payload;
-    private C context;
+    private final C context;
 
     public Command(T payload, C context) {
         this.payload = payload;
