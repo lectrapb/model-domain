@@ -1,4 +1,4 @@
-package com.app.domain.share.value;
+package com.app.domain.share.common.value;
 
 import lombok.Getter;
 

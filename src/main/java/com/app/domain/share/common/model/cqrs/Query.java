@@ -1,4 +1,4 @@
-package com.app.domain.customlimit.model;
+package com.app.domain.share.common.model.cqrs;
 
 import lombok.Data;
 

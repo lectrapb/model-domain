@@ -1,6 +1,6 @@
-package com.app.domain.share.model.exception.ecs;
+package com.app.domain.share.common.model.exception.ecs;
 
-import com.app.domain.share.model.exception.ConstantBusinessException;
+import com.app.domain.share.common.model.exception.ConstantBusinessException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;

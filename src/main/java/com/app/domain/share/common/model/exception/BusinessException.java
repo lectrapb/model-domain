@@ -1,6 +1,6 @@
-package com.app.domain.share.model.exception;
+package com.app.domain.share.common.model.exception;
 
-import com.app.domain.share.model.exception.ecs.BusinessExceptionECS;
+import com.app.domain.share.common.model.exception.ecs.BusinessExceptionECS;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.Map;

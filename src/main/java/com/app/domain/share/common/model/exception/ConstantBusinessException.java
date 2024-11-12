@@ -1,4 +1,4 @@
-package com.app.domain.share.model.exception;
+package com.app.domain.share.common.model.exception;
 
 import static java.net.HttpURLConnection.*;
 

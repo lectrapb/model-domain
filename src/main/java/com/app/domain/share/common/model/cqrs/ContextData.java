@@ -1,4 +1,4 @@
-package com.app.domain.share.model.cqrs;
+package com.app.domain.share.common.model.cqrs;
 
 import lombok.*;
 
@@ -10,5 +10,6 @@ public class ContextData {
 
     private String messageId;
     private String channel;
+    private String xRequestId;
 
 }

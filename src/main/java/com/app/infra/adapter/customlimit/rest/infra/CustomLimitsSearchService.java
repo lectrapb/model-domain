@@ -1,7 +1,7 @@
 package com.app.infra.adapter.customlimit.rest.infra;
 
-import com.app.domain.share.model.exception.BusinessException;
-import com.app.domain.share.model.exception.ConstantBusinessException;
+import com.app.domain.share.common.model.exception.BusinessException;
+import com.app.domain.share.common.model.exception.ConstantBusinessException;
 import com.app.infra.adapter.customlimit.rest.domain.ConstantHeader;
 import com.app.infra.adapter.customlimit.rest.domain.SearchCustomLimit;
 import com.fasterxml.jackson.databind.ObjectMapper;

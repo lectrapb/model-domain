@@ -1,6 +1,6 @@
 package com.app.infra.entrypoints.share.rest.domain;
 
-import com.app.domain.share.model.exception.ecs.BusinessExceptionECS;
+import com.app.domain.share.common.model.exception.ecs.BusinessExceptionECS;
 import lombok.*;
 
 import java.time.Instant;

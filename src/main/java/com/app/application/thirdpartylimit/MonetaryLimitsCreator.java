@@ -1,11 +1,12 @@
 package com.app.application.thirdpartylimit;
 
-import com.app.domain.share.model.cqrs.ContextData;
-import com.app.domain.customlimit.model.Command;
-import com.app.domain.customlimit.model.Query;
-import com.app.domain.share.model.cqrs.MonetaryLimitCreate;
-import com.app.domain.share.gateway.labels.UseCase;
-import com.app.domain.share.value.StatusLimitAvailable;
+import com.app.domain.customlimit.model.MonetaryLimitCreate;
+import com.app.domain.share.common.model.cqrs.ContextData;
+import com.app.domain.share.common.model.cqrs.Command;
+import com.app.domain.share.common.model.cqrs.Query;
+
+import com.app.domain.share.common.gateway.labels.UseCase;
+import com.app.domain.share.common.value.StatusLimitAvailable;
 import com.app.domain.thirdpartylimit.gateway.MonetaryLimitCreatorGateway;
 import com.app.domain.thirdpartylimit.model.Channel;
 import com.app.domain.thirdpartylimit.model.ThirdPartyLimit;
@@ -49,7 +50,7 @@ public class MonetaryLimitsCreator {
                 var querySuid = new Query<>(thirpartyLimit, command.context());
                 var result = repository.searchSuid(querySuid);
 
-                //----
+                //---------------------------------------------------------------
                 // put, create and Update son commandos
                 return Mono.fromCallable(() ->
                                 new Command<>(thirdParty, command.context()))

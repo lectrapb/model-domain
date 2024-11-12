@@ -1,7 +1,7 @@
 package com.app.infra.entrypoints.share.helpers.ecs;
 
 
-import com.app.domain.share.model.exception.AppException;
+import com.app.domain.share.common.model.exception.AppException;
 import com.app.infra.entrypoints.share.helpers.ecs.model.LogException;
 import com.app.infra.entrypoints.share.helpers.ecs.model.LoggerEcs;
 import com.app.infra.entrypoints.share.helpers.ecs.model.MiddlewareEcsLog;

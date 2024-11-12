@@ -1,4 +1,4 @@
-package com.app.domain.share.gateway.labels;
+package com.app.domain.share.common.gateway.labels;
 
 import java.lang.annotation.*;
 

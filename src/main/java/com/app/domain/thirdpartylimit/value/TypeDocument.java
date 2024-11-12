@@ -1,8 +1,8 @@
 package com.app.domain.thirdpartylimit.value;
 
-import com.app.domain.share.model.exception.BusinessException;
-import com.app.domain.share.model.exception.ConstantBusinessException;
-import com.app.domain.share.value.TypeDocumentAvailable;
+import com.app.domain.share.common.model.exception.BusinessException;
+import com.app.domain.share.common.model.exception.ConstantBusinessException;
+import com.app.domain.share.common.value.TypeDocumentAvailable;
 import lombok.Getter;
 
 @Getter

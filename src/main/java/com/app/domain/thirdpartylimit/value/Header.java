@@ -1,7 +1,7 @@
 package com.app.domain.thirdpartylimit.value;
 
-import com.app.domain.share.model.exception.ConstantBusinessException;
-import com.app.domain.share.model.exception.ecs.BusinessExceptionECS;
+import com.app.domain.share.common.model.exception.ConstantBusinessException;
+import com.app.domain.share.common.model.exception.ecs.BusinessExceptionECS;
 
 public class Header {
 

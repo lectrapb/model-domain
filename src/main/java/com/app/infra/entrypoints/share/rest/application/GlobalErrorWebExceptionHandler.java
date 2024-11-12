@@ -1,7 +1,6 @@
 package com.app.infra.entrypoints.share.rest.application;
 
-import com.app.domain.share.model.exception.BusinessException;
-import com.app.domain.share.model.exception.ecs.BusinessExceptionECS;
+import com.app.domain.share.common.model.exception.BusinessException;
 import com.app.infra.entrypoints.share.helpers.ecs.Ecs;
 import com.app.infra.entrypoints.share.rest.domain.RestResponse;
 import org.springframework.boot.autoconfigure.web.WebProperties;

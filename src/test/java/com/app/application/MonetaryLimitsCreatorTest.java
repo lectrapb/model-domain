@@ -1,11 +1,11 @@
 package com.app.application;
 
 import com.app.application.thirdpartylimit.MonetaryLimitsCreator;
-import com.app.domain.customlimit.model.Command;
-import com.app.domain.share.model.cqrs.ContextData;
+import com.app.domain.share.common.model.cqrs.Command;
+import com.app.domain.share.common.model.cqrs.ContextData;
 import com.app.domain.share.model.cqrs.MonetaryLimitCreate;
 import com.app.domain.thirdpartylimit.gateway.MonetaryLimitCreatorGateway;
-import com.app.domain.share.value.TypeDocumentAvailable;
+import com.app.domain.share.common.value.TypeDocumentAvailable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
