@@ -20,15 +20,13 @@ public class LogsSendAdapter implements LogsSendGateway {
     @Override
     public Mono<Void> register(Command<Map<String, String>, ContextData> command) {
 
-        var result = Mono.defer(() ->{
+        return Mono.defer(() ->{
             var objectMapper = new ObjectMapper();
             String jsonData = null;
             jsonData = getString(command, objectMapper);
             log.info(jsonData);
             return Mono.empty();
         });
-
-        return Mono.empty();
     }
 
     private static String getString(Command<Map<String, String>, ContextData> command, ObjectMapper objectMapper) {
