@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 @DomainService
 @AllArgsConstructor
-public class ThirdLimitCreateHandler implements CommandHandler<ThirdLimitCreateCommand> {
+public class ThirdLimitCreateCmdHandler implements CommandHandler<ThirdLimitCreateCommand> {
 
     private final MonetaryLimitsCreator monetaryLimitsCreator;
 

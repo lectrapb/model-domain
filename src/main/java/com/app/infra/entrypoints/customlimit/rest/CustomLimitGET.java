@@ -2,6 +2,8 @@ package com.app.infra.entrypoints.customlimit.rest;
 
 
 import com.app.application.customlimit.MonetaryClientSearch;
+import com.app.domain.share.common.model.cqrs.ContextData;
+import com.app.domain.share.common.model.cqrs.Query;
 import com.app.infra.adapter.customlimit.rest.domain.ConstantHeader;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -24,10 +26,11 @@ public class CustomLimitGET {
     public Mono<ServerResponse> search(ServerRequest request){
         Map<String, String> parameters = new HashMap<>();
         var urlTest = request.headers().asHttpHeaders().getFirst(URL_TEST);
-        var message_id = request.headers().asHttpHeaders().getFirst(ConstantHeader.MESSAGE_ID);
+        var messageId = request.headers().asHttpHeaders().getFirst(ConstantHeader.MESSAGE_ID);
         parameters.put(URL_TEST, urlTest);
-        parameters.put(ConstantHeader.MESSAGE_ID, message_id);
-        return limitCustomSearch.searchLimit(parameters)
+        parameters.put(ConstantHeader.MESSAGE_ID, messageId);
+        return limitCustomSearch.searchLimit(new Query<>(parameters,
+                        ContextData.builder().messageId(messageId).build()))
                 .flatMap(o -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON).bodyValue(o));
 

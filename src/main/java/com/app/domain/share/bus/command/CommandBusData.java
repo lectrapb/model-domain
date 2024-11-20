@@ -1,4 +1,4 @@
 package com.app.domain.share.bus.command;
 
-public interface CommandData {
+public interface CommandBusData {
 }

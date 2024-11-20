@@ -1,8 +1,8 @@
 package com.app.domain.share.common.model.cqrs;
 
-import lombok.Data;
 
-@Data
+
+
 public class Query<T,C>{
 
     private T payload;

@@ -4,5 +4,5 @@ import reactor.core.publisher.Mono;
 
 public interface CommandBus {
 
-    Mono<Void> dispatch(CommandData command) ;
+    Mono<Void> dispatch(CommandBusData command) ;
 }

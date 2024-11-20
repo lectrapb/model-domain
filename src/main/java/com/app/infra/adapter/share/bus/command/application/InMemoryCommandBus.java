@@ -1,7 +1,7 @@
 package com.app.infra.adapter.share.bus.command.application;
 
 import com.app.domain.share.bus.command.CommandBus;
-import com.app.domain.share.bus.command.CommandData;
+import com.app.domain.share.bus.command.CommandBusData;
 import com.app.domain.share.bus.command.CommandHandler;
 import com.app.domain.share.common.gateway.labels.DomainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class InMemoryCommandBus  implements CommandBus {
     }
 
     @Override
-    public Mono<Void> dispatch(CommandData command) {
+    public Mono<Void> dispatch(CommandBusData command) {
         Class<? extends CommandHandler> commandHandlerClass = information.search(command.getClass());
         CommandHandler handler = context.getBean(commandHandlerClass);
         return handler.handle(command);
