@@ -1,4 +1,4 @@
-package com.app.infra.adapter.share.bus.command;
+package com.app.infra.adapter.share.bus.command.application;
 
 
 
@@ -8,7 +8,6 @@ import com.app.domain.share.bus.command.CommandData;
 import com.app.domain.share.bus.command.CommandHandler;
 import com.app.domain.share.bus.command.CommandNotRegisteredError;
 import com.app.domain.share.common.gateway.labels.DomainService;
-import com.app.domain.share.common.gateway.labels.UseCase;
 
 import java.util.HashMap;
 

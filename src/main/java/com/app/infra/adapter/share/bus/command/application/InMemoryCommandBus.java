@@ -1,4 +1,4 @@
-package com.app.infra.adapter.share.bus.command;
+package com.app.infra.adapter.share.bus.command.application;
 
 import com.app.domain.share.bus.command.CommandBus;
 import com.app.domain.share.bus.command.CommandData;

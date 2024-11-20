@@ -1,4 +1,4 @@
-package com.app.infra.adapter.share.config;
+package com.app.infra.adapter.share.common.infra.config;
 
 import com.app.domain.share.common.gateway.labels.DomainService;
 import com.app.domain.share.common.gateway.labels.UseCase;

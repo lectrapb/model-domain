@@ -23,27 +23,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ThirdPartyPOST {
 
- //   private final MonetaryLimitsCreator limitCreate;
-    private final CommandBus commandBus;
-
-
-
-//    public Mono<ServerResponse> create(ServerRequest request){
-//
-//        var messageId = request.headers().asHttpHeaders().getFirst(ConstantHeader.MESSAGE_ID);
-//        var contextData = ContextData.builder().messageId(messageId).build();
-//
-//        return request.bodyToMono(MonetaryLimitCreate.class)
-//                .flatMap(monetaryLimitCreate -> limitCreate
-//                        .addLimit(new Command<>(monetaryLimitCreate,contextData)))
-//                .map(Optional::of)
-//                .defaultIfEmpty(Optional.empty())
-//                .flatMap(opt -> ServerResponse.status(HttpStatus.CREATED)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .body(Mono.just(RestResponse.okCommand()), RestResponse.class));
-//
-//    }
-
+    private final MonetaryLimitsCreator limitCreate;
 
     public Mono<ServerResponse> create(ServerRequest request){
 
@@ -51,8 +31,8 @@ public class ThirdPartyPOST {
         var contextData = ContextData.builder().messageId(messageId).build();
 
         return request.bodyToMono(MonetaryLimitCreate.class)
-                .flatMap(monetaryLimitCreate -> commandBus.dispatch(new
-                        ThirdLimitCreateCommand( monetaryLimitCreate,contextData)))
+                .flatMap(monetaryLimitCreate -> limitCreate
+                        .addLimit(new Command<>(monetaryLimitCreate,contextData)))
                 .map(Optional::of)
                 .defaultIfEmpty(Optional.empty())
                 .flatMap(opt -> ServerResponse.status(HttpStatus.CREATED)
@@ -60,4 +40,7 @@ public class ThirdPartyPOST {
                         .body(Mono.just(RestResponse.okCommand()), RestResponse.class));
 
     }
+
+
+
 }

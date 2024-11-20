@@ -1,4 +1,4 @@
-package com.app.infra.adapter.share.config;
+package com.app.infra.adapter.share.common.infra.config;
 
 
 import io.netty.handler.timeout.ReadTimeoutHandler;

@@ -1,11 +1,10 @@
 package com.app.application.thirdpartylimit;
 
+import com.app.application.share.logs.RegisterLogs;
 import com.app.domain.customlimit.model.MonetaryLimitCreate;
-import com.app.domain.share.common.model.cqrs.ContextData;
-import com.app.domain.share.common.model.cqrs.Command;
-import com.app.domain.share.common.model.cqrs.Query;
-
 import com.app.domain.share.common.gateway.labels.UseCase;
+import com.app.domain.share.common.model.cqrs.Command;
+import com.app.domain.share.common.model.cqrs.ContextData;
 import com.app.domain.share.common.value.StatusLimitAvailable;
 import com.app.domain.thirdpartylimit.gateway.MonetaryLimitCreatorGateway;
 import com.app.domain.thirdpartylimit.model.Channel;
@@ -23,43 +22,24 @@ import java.util.Map;
 public class MonetaryLimitsCreator {
 
     private final MonetaryLimitCreatorGateway repository;
-/*
-    public Mono<Void> addLimit(MonetaryLimitCreate limitCreate){
+    private final RegisterLogs registerLogs;
 
-
-        return  Mono.fromCallable(() -> new ThirdPartyLimit(
-                        Customer.of(limitCreate.getIdentification().getType(),
-                                limitCreate.getIdentification().getNumber()),
-                        new StatusMonetaryLimit(StatusLimitAvailable.ENABLE.name()),
-                        new Channel(limitCreate.getChannel().getCode()))
-                )
-
-                .flatMap(repository::save);
-    }
-*/
     public Mono<Void> addLimit(Command<MonetaryLimitCreate, ContextData> command){
 
+                var successLog = new Command<>(Map.of("LOG-01", "SUCCESS"), command.context());
                 var thirdParty = new ThirdPartyLimit(
                         Customer.of(command.payload().getIdentification().getType(),
                                 command.payload().getIdentification().getNumber()),
                         new StatusMonetaryLimit(StatusLimitAvailable.ENABLE.name()),
                         new Channel( command.payload().getChannel().getCode()));
 
-                var thirpartyLimit = Map.of("result", 1,
-                        "id", 100);
-                var querySuid = new Query<>(thirpartyLimit, command.context());
-                var result = repository.searchSuid(querySuid);
-
-                //---------------------------------------------------------------
-                // put, create and Update son commandos
                 return Mono.fromCallable(() ->
                                 new Command<>(thirdParty, command.context()))
-                       .flatMap(repository::save);
+                        .flatMap(repository::save)
+                        .then(registerLogs.persist(successLog));
 
     }
 
-    public Mono<Query<MonetaryLimitCreate, ContextData>> addLimit(Query<MonetaryLimitCreate, ContextData> query){
 
-        return null;
-    }
+
 }

@@ -1,9 +1,10 @@
 package com.app.application;
 
+import com.app.application.share.logs.RegisterLogs;
 import com.app.application.thirdpartylimit.MonetaryLimitsCreator;
+import com.app.domain.customlimit.model.MonetaryLimitCreate;
 import com.app.domain.share.common.model.cqrs.Command;
 import com.app.domain.share.common.model.cqrs.ContextData;
-import com.app.domain.share.model.cqrs.MonetaryLimitCreate;
 import com.app.domain.thirdpartylimit.gateway.MonetaryLimitCreatorGateway;
 import com.app.domain.share.common.value.TypeDocumentAvailable;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,12 +23,14 @@ class MonetaryLimitsCreatorTest {
 
 
     private MonetaryLimitCreatorGateway repository;
+    private RegisterLogs logs;
     private MonetaryLimitsCreator useCase;
 
     @BeforeEach
     void setUp() {
         repository = mock(MonetaryLimitCreatorGateway.class);
-        useCase = new MonetaryLimitsCreator(repository);
+        logs = mock(RegisterLogs.class);
+        useCase = new MonetaryLimitsCreator(repository, logs);
     }
 
     @Test
