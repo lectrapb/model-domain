@@ -1,4 +1,4 @@
-package com.app.domain.share.bus.command;
+package com.app.domain.share.bus.command.gateway;
 
 import reactor.core.publisher.Mono;
 

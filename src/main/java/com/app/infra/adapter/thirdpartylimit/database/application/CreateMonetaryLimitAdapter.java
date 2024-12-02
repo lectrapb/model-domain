@@ -1,8 +1,8 @@
 package com.app.infra.adapter.thirdpartylimit.database.application;
 
-import com.app.domain.share.common.model.cqrs.ContextData;
-import com.app.domain.share.common.model.cqrs.Command;
-import com.app.domain.share.common.model.cqrs.Query;
+import com.app.domain.share.cqrs.model.ContextData;
+import com.app.domain.share.cqrs.model.Command;
+import com.app.domain.share.cqrs.model.Query;
 import com.app.domain.thirdpartylimit.gateway.MonetaryLimitCreatorGateway;
 import com.app.domain.thirdpartylimit.model.ThirdPartyLimit;
 import com.app.infra.adapter.thirdpartylimit.database.domain.ThirdPartyLimitData;

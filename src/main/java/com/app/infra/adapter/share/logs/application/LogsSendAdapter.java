@@ -1,7 +1,7 @@
 package com.app.infra.adapter.share.logs.application;
 
-import com.app.domain.share.common.model.cqrs.Command;
-import com.app.domain.share.common.model.cqrs.ContextData;
+import com.app.domain.share.cqrs.model.Command;
+import com.app.domain.share.cqrs.model.ContextData;
 import com.app.domain.share.logs.gateway.LogsSendGateway;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

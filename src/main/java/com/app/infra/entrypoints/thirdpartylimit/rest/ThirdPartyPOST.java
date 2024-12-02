@@ -2,11 +2,9 @@ package com.app.infra.entrypoints.thirdpartylimit.rest;
 
 
 import com.app.application.thirdpartylimit.MonetaryLimitsCreator;
-import com.app.application.thirdpartylimit.ThirdLimitCreateCommand;
 import com.app.domain.customlimit.model.MonetaryLimitCreate;
-import com.app.domain.share.bus.command.CommandBus;
-import com.app.domain.share.common.model.cqrs.Command;
-import com.app.domain.share.common.model.cqrs.ContextData;
+import com.app.domain.share.cqrs.model.Command;
+import com.app.domain.share.cqrs.model.ContextData;
 import com.app.infra.adapter.customlimit.rest.domain.ConstantHeader;
 import com.app.infra.entrypoints.share.rest.domain.RestResponse;
 import lombok.AllArgsConstructor;

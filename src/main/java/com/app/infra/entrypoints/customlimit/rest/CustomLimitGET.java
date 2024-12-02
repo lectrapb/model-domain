@@ -2,8 +2,8 @@ package com.app.infra.entrypoints.customlimit.rest;
 
 
 import com.app.application.customlimit.MonetaryClientSearch;
-import com.app.domain.share.common.model.cqrs.ContextData;
-import com.app.domain.share.common.model.cqrs.Query;
+import com.app.domain.share.cqrs.model.ContextData;
+import com.app.domain.share.cqrs.model.Query;
 import com.app.infra.adapter.customlimit.rest.domain.ConstantHeader;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;

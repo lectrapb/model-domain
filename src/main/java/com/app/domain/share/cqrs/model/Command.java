@@ -1,4 +1,4 @@
-package com.app.domain.share.common.model.cqrs;
+package com.app.domain.share.cqrs.model;
 
 public class Command <T,C>{
 

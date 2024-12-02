@@ -1,15 +1,15 @@
 package com.app.infra.adapter.share.bus.command.application;
 
-import com.app.domain.share.bus.command.CommandBus;
-import com.app.domain.share.bus.command.CommandBusData;
-import com.app.domain.share.bus.command.CommandHandler;
-import com.app.domain.share.common.gateway.labels.DomainService;
+import com.app.domain.share.bus.command.gateway.CommandBus;
+import com.app.domain.share.bus.command.gateway.CommandBusData;
+import com.app.domain.share.bus.command.gateway.CommandHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Mono;
 
 
-@DomainService
+@Configuration
 public class InMemoryCommandBus  implements CommandBus {
 
     private final CommandHandlersInformation information;

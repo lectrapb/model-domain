@@ -1,8 +1,8 @@
 package com.app.infra.adapter.customlimit.rest.application;
 
 import com.app.domain.customlimit.gateway.SearchCustomLimitGateway;
-import com.app.domain.share.common.model.cqrs.ContextData;
-import com.app.domain.share.common.model.cqrs.Query;
+import com.app.domain.share.cqrs.model.ContextData;
+import com.app.domain.share.cqrs.model.Query;
 import com.app.infra.adapter.customlimit.rest.infra.CustomLimitsSearchService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

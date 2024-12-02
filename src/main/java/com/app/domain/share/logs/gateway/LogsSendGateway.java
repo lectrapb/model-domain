@@ -1,7 +1,7 @@
 package com.app.domain.share.logs.gateway;
 
-import com.app.domain.share.common.model.cqrs.Command;
-import com.app.domain.share.common.model.cqrs.ContextData;
+import com.app.domain.share.cqrs.model.Command;
+import com.app.domain.share.cqrs.model.ContextData;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;

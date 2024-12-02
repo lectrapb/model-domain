@@ -1,8 +1,8 @@
 package com.app.domain.thirdpartylimit.gateway;
 
-import com.app.domain.share.common.model.cqrs.Query;
-import com.app.domain.share.common.model.cqrs.ContextData;
-import com.app.domain.share.common.model.cqrs.Command;
+import com.app.domain.share.cqrs.model.Query;
+import com.app.domain.share.cqrs.model.ContextData;
+import com.app.domain.share.cqrs.model.Command;
 import com.app.domain.thirdpartylimit.model.ThirdPartyLimit;
 import reactor.core.publisher.Mono;
 

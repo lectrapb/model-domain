@@ -1,11 +1,11 @@
 package com.app.application.share.logs;
 
-import com.app.domain.share.bus.command.CommandHandler;
-import com.app.domain.share.common.gateway.labels.DomainService;
+import com.app.domain.share.bus.command.gateway.CommandHandler;
+import com.app.domain.share.bus.command.gateway.label.CommandHandlerService;
 import lombok.AllArgsConstructor;
 import reactor.core.publisher.Mono;
 
-@DomainService
+@CommandHandlerService
 @AllArgsConstructor
 public class RegisterLogsCmdHandler implements CommandHandler<RegisterLogsCommand> {
 

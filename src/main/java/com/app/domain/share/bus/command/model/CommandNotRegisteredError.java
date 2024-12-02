@@ -1,4 +1,6 @@
-package com.app.domain.share.bus.command;
+package com.app.domain.share.bus.command.model;
+
+import com.app.domain.share.bus.command.gateway.CommandBusData;
 
 public final  class CommandNotRegisteredError extends RuntimeException {
 

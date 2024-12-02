@@ -1,7 +1,7 @@
 package com.app.domain.customlimit.gateway;
 
-import com.app.domain.share.common.model.cqrs.ContextData;
-import com.app.domain.share.common.model.cqrs.Query;
+import com.app.domain.share.cqrs.model.ContextData;
+import com.app.domain.share.cqrs.model.Query;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
