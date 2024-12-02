@@ -38,7 +38,7 @@ public class CommandHandlersInformation {
                                 });
     }
 
-    public Class<? extends CommandHandler> search(Class<? extends CommandBusData> commandClass) throws CommandNotRegisteredError {
+    public  Class<? extends CommandHandler> search(Class<? extends CommandBusData> commandClass) throws CommandNotRegisteredError {
         Class<? extends CommandHandler> commandHandlerClass = indexedCommandHandlers.get(commandClass);
         if (null == commandHandlerClass) {
             throw new CommandNotRegisteredError(commandClass);
