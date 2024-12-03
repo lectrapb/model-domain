@@ -21,6 +21,8 @@ public class InMemoryCommandBus  implements CommandBus {
         this.context = context;
     }
 
+    //------------------------------------------------------
+    //
     @Override
     public Mono<Void> dispatch(CommandBusData command) {
         Class<? extends CommandHandler> commandHandlerClass = information.search(command.getClass());

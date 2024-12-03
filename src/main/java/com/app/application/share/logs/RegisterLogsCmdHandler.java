@@ -14,6 +14,7 @@ public class RegisterLogsCmdHandler implements CommandHandler<RegisterLogsComman
 
     @Override
     public Mono<Void> handle(RegisterLogsCommand commandData) {
+
         return registerLogs.persist(commandData.command());
     }
 }

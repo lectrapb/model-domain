@@ -1,5 +1,6 @@
 package com.app.application.thirdpartylimit;
 
+import com.app.application.share.logs.RegisterLogs;
 import com.app.application.share.logs.RegisterLogsCommand;
 import com.app.domain.customlimit.model.MonetaryLimitCreate;
 import com.app.domain.share.bus.command.gateway.CommandBus;
@@ -26,6 +27,7 @@ public class MonetaryLimitsCreator {
     private final MonetaryLimitCreatorGateway repository;
     private final CommandBus commandBus;
     private final EventBus eventBus;
+    private final RegisterLogs registerLogs;
 
     public Mono<Void> addLimit(Command<MonetaryLimitCreate, ContextData> command){
 

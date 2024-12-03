@@ -7,7 +7,7 @@ import java.time.Instant;
 
 
 @Getter
-public abstract class DomainEvent<T extends DomainEvent<T>> {
+public abstract class DomainEvent<T> {
 
     private final String  type;
     private final String  source;
@@ -16,10 +16,13 @@ public abstract class DomainEvent<T extends DomainEvent<T>> {
     private final String  dataContentType;
     private final String  extensions;
     private final Instant time;
+    private final T data;
 
 
 
-    public DomainEvent(String type, String source, String subject){
+    public DomainEvent(String type,
+                       String source,
+                       String subject, T data){
         this.type = type;
         this.source = source;
         this.subject = subject;
@@ -27,10 +30,20 @@ public abstract class DomainEvent<T extends DomainEvent<T>> {
         this.dataContentType = "application/json";
         this.extensions = "";
         this.time = Instant.now();
+        this.data = data;
     }
 
-    public abstract T getData();
-
-
-
+    @Override
+    public String toString() {
+        return "DomainEvent{" +
+                "type='" + type + '\'' +
+                ", source='" + source + '\'' +
+                ", id='" + id + '\'' +
+                ", subject='" + subject + '\'' +
+                ", dataContentType='" + dataContentType + '\'' +
+                ", extensions='" + extensions + '\'' +
+                ", time=" + time +
+                ", data=" + data +
+                '}';
+    }
 }

@@ -25,7 +25,7 @@ public class CommandHandlersInformation {
         indexedCommandHandlers = new HashMap<>();
         registerCommandHandlers();
     }
-
+    //todo: crear Mapa de class vs beean handler
     private void registerCommandHandlers() {
         Arrays.stream(applicationContext.getBeanDefinitionNames())
                 .map(applicationContext::getType)
